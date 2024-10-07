@@ -31,6 +31,7 @@ def transform_n_load(
 
     c = conn.cursor()
     # Create tables
+    log_tests("Creating tables...")
     for k, v in new_data_tables.items():
         create_table(c, k, v, column_attributes)
 
