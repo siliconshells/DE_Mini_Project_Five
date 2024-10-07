@@ -27,9 +27,11 @@ def transform_n_load(
         c.execute(f"DROP TABLE IF EXISTS {k}")
         col_attrib_list = [(f"{col} {column_attributes[col]}") for col in v]
         c.execute(f"CREATE TABLE {k} ({', '.join(col_attrib_list)})")
+        
     for k, v in new_lookup_tables.items():
         c.execute(f"DROP TABLE IF EXISTS {k}")
-        c.execute(f"CREATE TABLE {k} ({', '.join((f"{col} {column_attributes[col]}") for col in v)})")
+        col_attrib_list = [(f"{col} {column_attributes[col]}") for col in v]
+        c.execute(f"CREATE TABLE {k} ({', '.join(col_attrib_list)})")
     
     # skip the first row
     next(reader)
