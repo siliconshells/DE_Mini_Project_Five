@@ -117,12 +117,22 @@ def test_get_table_columns():
     print(get_table_columns("air_quality.db", "air_quality"))
 
 
+# Two addtional queries to meet requirements
+def execute_two_addtional_queries():
+    print("****************Data in Geo_Data*************************")
+    print(read_all_data("air_quality.db", "geo_data"))
+    print()
+    print("****************Data in Indicator*************************")
+    print(read_all_data("air_quality.db", "indicator"))
+
+
 if __name__ == "__main__":
     test_extract()
-    transform_n_load()
+    test_transform_and_load()
     test_read_data()
     test_read_all_data()
     test_save_data()
     test_update_data()
     test_delete_data()
     test_get_table_columns()
+    execute_two_addtional_queries()
