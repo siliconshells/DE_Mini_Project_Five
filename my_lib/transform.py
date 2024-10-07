@@ -12,7 +12,7 @@ def transform_n_load(
     local_dataset="air_quality.csv",
     database_name="air_quality.db",
     new_data_tables={ #add field types
-        "air_quality": ["air_quality_id", "time_period", "start_date", "data_value"],
+        "air_quality": ["air_quality_id", "fn_indicator_id", "fn_geo_id", "time_period", "start_date", "data_value"],
     },
     new_lookup_tables={ #add field types
         "indicator": ["indicator_id", "indicator_name", "measure", "measure_info"],
@@ -29,7 +29,9 @@ def transform_n_load(
         "geo_place_name":"TEXT",
         "time_period":"TEXT",
         "start_date":"TEXT",
-        "data_value":"REAL"
+        "data_value":"REAL",
+        "fn_indicator_id":"INTEGER",
+        "fn_geo_id":"INTEGER"
     },
     column_map = {
         "air_quality_id":0,
@@ -42,7 +44,9 @@ def transform_n_load(
         "geo_place_name":7,
         "time_period":8,
         "start_date":9,
-        "data_value":10
+        "data_value":10,
+        "fn_geo_id":6,
+        "fn_indicator_id":1,
     }
 ):
     """ "Transforms and Loads data into the local SQLite3 database"""
@@ -70,22 +74,11 @@ def transform_n_load(
         conn.commit()
 
         for k, v in new_lookup_tables.items():
-            # print(c.execute(f"select count(*) from {k}").fetchone())
-            # print(c.execute(f"select count({v[0]}) from {k} where {v[0]} = ({row[column_map[v[0]]]},)"))
-            id = int(row[column_map[v[0]]])
-            exec_str =  f"select count({v[0]}) from {k} where {v[0]} = ?"
-            print(len(c.execute(exec_str, (id,)).fetchall()))
-            result = c.execute(exec_str, (id,)).fetchall()
-            if result:     
-            #  print(f"INSERT INTO {k} ({', '.join(v)}) VALUES ('{"', '".join([(row[column_map[col]]) for col in v])}')")    
+            exec_str =  f"select count({v[0]}) from {k} where {v[0]} = {int(row[column_map[v[0]]])}"
+            result = c.execute(exec_str).fetchone()[0]
+            if result == 0:     
                 c.execute(f"INSERT INTO {k} ({', '.join(v)}) VALUES ('{"', '".join([(row[column_map[col]]) for col in v])}')")
                 conn.commit()
-                # print(c.execute(f"select {v[0]} from {k} where {v[0]} = {row[column_map[v[0]]]}").fetchall())
-
-        for k, v in new_data_tables.items():          
-            c.execute(f"INSERT INTO {k} ({', '.join(v)}) VALUES ('{"', '".join([(row[column_map[col]]) for col in v])}')")
-        conn.commit()
-
 
 
     conn.close()
