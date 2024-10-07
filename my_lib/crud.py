@@ -5,9 +5,9 @@ from my_lib.util import log_tests
 def get_table_columns(database_name: str, table_name: str):
     conn = sqlite3.connect("data/" + database_name)
     c = conn.cursor()
-    columns = c.execute(
-        f"SELECT name FROM pragma_table_info('{table_name}')"
-    ).fetchall()
+    to_execute = f"SELECT name FROM pragma_table_info('{table_name}')"
+    log_tests(to_execute, issql=True)
+    columns = c.execute(to_execute).fetchall()
     return [
         (str(column).strip(")").strip("(").strip(",").strip("'")) for column in columns
     ]
