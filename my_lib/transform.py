@@ -4,6 +4,7 @@ Transform the extracted data
 
 import sqlite3
 import csv
+from my_lib.util import log_tests
 
 
 def create_table(cursor, table, columns, column_attributes):

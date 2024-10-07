@@ -1,5 +1,7 @@
 from my_lib.extract import extract
 from my_lib.transform import transform_n_load
+from my_lib.util import log_tests
+import os
 from my_lib.crud import (
     read_data,
     read_all_data,
@@ -10,18 +12,23 @@ from my_lib.crud import (
 )
 
 
-def log_tests(log, iscode):
-    """adds to a logs markdown file to show successful operations"""
-    with open("test_log.md", "a") as file:
-        if iscode:
-            file.write(f"```sql\n{log}\n```\n\n")
-        else:
-            file.write(f"\n{log}\n\n\n")
-
-
 # Test extract
 def test_extract():
+    log_tests("Extraction Test", header=True, new_log_file=True)
+    log_tests("Removing existing CSV file exists")
+    if os.path.exists("data/air_quality.csv"):
+        os.remove("data/air_quality.csv")
+
+    log_tests("Confirming that CSV file doesn't exists...")
+    assert not os.path.exists("population_bar.png")
+    log_tests("Test Successful")
+
+    log_tests("Extracting data and saving...")
     extract("https://data.cityofnewyork.us/resource/c3uy-2p5r.csv", "air_quality.csv")
+
+    log_tests("Testing if CSV file exists...")
+    assert os.path.exists("data/air_quality.csv")
+    log_tests("Test Successful", last_in_group=True)
 
 
 # Test transform and load

@@ -1,0 +1,9 @@
+### Extraction Test ###
+Removing existing CSV file exists
+Confirming that CSV file doesn't exists...
+Test Successful
+Extracting data and saving...
+Testing if CSV file exists...
+Test Successful
+
+

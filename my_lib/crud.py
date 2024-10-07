@@ -1,4 +1,5 @@
 import sqlite3
+from my_lib.util import log_tests
 
 
 def get_table_columns(database_name: str, table_name: str):
