@@ -3,13 +3,6 @@
 [![CI](https://github.com/nogibjj/Leonard_Eshun_Mini_Project_Five/actions/workflows/workflow.yml/badge.svg)](https://github.com/nogibjj/Leonard_Eshun_Mini_Project_Five/actions/workflows/workflow.yml)
 
 
-Column names shouldn't have spaces
-The ID column should always be the first column
-Give the csv a header (first row)
-
-
-
-
 This repository is created as an assignment from the Data Engineering course, IDS 706. The aim is to create a python script that interacts with an SQL Database.
 
 The requirements are:
@@ -30,6 +23,9 @@ The requirements are:
 	- url : The url for the external CSV file
 	- file_name : The file name to use to save the CSV file locally
 
+	> [!NOTE]
+	>- Give the CSV file a header (first row)
+
 
 1. **transform_n_load** to create a number of tables in the SQLite database based on the table structures you give it for transformation, then saves the content of the csv file to the tables you created. 
 	```python
@@ -48,6 +44,11 @@ The requirements are:
 	- new_lookup_tables : A dictionary of the tables lookup tables to be created. The key is the table name and the value is an array of columns.
 	- column_attributes : A dictionary of the column attributes, eg. Integer, Primary Key. The key is the column name and the values are the attributes.
 	- column_map : A dictionary maping the columns in the new tables defined above to the column indices in the CSV file. The key is the column.
+
+	> [!NOTE]
+	>- The ID Primary Key of the table should always be the first column.
+	>- Column names shouldn't have spaces.
+
 
 1. **read_data** to readon one data from the SQLite database based on the record id you give it.
 	```python
