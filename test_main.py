@@ -1,25 +1,17 @@
-# from main import add
-# from main import get_the_capital_of_a_country
+from my_lib.extract import extract
+from my_lib.transform import transform_n_load
+from my_lib.crud import read_data, read_all_data, save_data, delete_data, update_data
 
 
-# def test_add():
-#     """Tewting the add function"""
-#     assert add(2, 2) == 4
-#     assert add(3, 2) == 5
-
-
-# def test_countries():
-#     """testing out get_the_capital_of_a_country function"""
-#     assert get_the_capital_of_a_country("United States") == "Washington D.C."
-#     assert get_the_capital_of_a_country("Ghana") == "Accra"
-#     assert get_the_capital_of_a_country("united states") == "Washington D.C."
-#     assert (
-#         get_the_capital_of_a_country("London")
-#         == "The country you specified was not found!"
-#     )
-
-
-# if __name__ == "__main__":
-#     test_add()
-#     test_countries()
-#     print("Test completed successfully")
+if __name__ == "__main__":
+    extract("https://data.cityofnewyork.us/resource/c3uy-2p5r.csv", "air_quality.csv")
+    transform_n_load()
+    # print(read_data("air_quality.db", "air_quality", 740885))
+    # print(read_all_data("air_quality.db", "air_quality"))
+    print(save_data("air_quality.db", "geo_data", ["1000", "Lancaster", "UFO"]))
+    # print(delete_data("air_quality.db", "geo_data", 1000))
+    print(
+        update_data(
+            "air_quality.db", "geo_data", {"geo_place_name": "The Heights"}, 1000
+        )
+    )
