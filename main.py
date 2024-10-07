@@ -82,42 +82,48 @@ def main():
 
     if args.Functions == "extract":
         print("Extracting data...")
-        extract(args.url, args.file_name)
+        print(extract(args.url, args.file_name))
 
     elif args.Functions == "transform_n_load":
         print("Transforming and loading data...")
-        transform_n_load(
-            args.local_dataset,
-            args.database_name,
-            args.new_data_tables,
-            args.new_lookup_tables,
-            args.column_attributes,
-            args.column_map,
+        print(
+            transform_n_load(
+                args.local_dataset,
+                args.database_name,
+                args.new_data_tables,
+                args.new_lookup_tables,
+                args.column_attributes,
+                args.column_map,
+            )
         )
 
     elif args.Functions == "read_data":
-        read_data(args.database_name, args.table_name, args.data_id)
+        print(read_data(args.database_name, args.table_name, args.data_id))
 
     elif args.Functions == "read_all_data":
-        read_all_data(args.database_name, args.table_name)
+        print(read_all_data(args.database_name, args.table_name))
 
     elif args.Functions == "save_data":
-        save_data(
-            args.database_name,
-            args.table_name,
-            args.row,
+        print(
+            save_data(
+                args.database_name,
+                args.table_name,
+                args.row,
+            )
         )
 
     elif args.action == "update_data":
-        update_data(
-            args.database_name, args.table_name, args.data_id, args.things_to_update
+        print(
+            update_data(
+                args.database_name, args.table_name, args.data_id, args.things_to_update
+            )
         )
 
     elif args.Functions == "delete_data":
-        delete_data(args.database_name, args.table_name, args.data_id)
+        print(delete_data(args.database_name, args.table_name, args.data_id))
 
     elif args.Functions == "get_table_columns":
-        get_table_columns(args.database_name, args.table_name)
+        print(get_table_columns(args.database_name, args.table_name))
 
     else:
         print(f"Unknown function: {args.action}")
@@ -125,14 +131,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # extract("https://data.cityofnewyork.us/resource/c3uy-2p5r.csv", "air_quality.csv")
-    # transform_n_load()
-    # print(read_data("air_quality.db", "air_quality", 740885))
-    # print(read_all_data("air_quality.db", "air_quality"))
-    # print(save_data("air_quality.db", "geo_data", ["1000", "Lancaster", "UFO"]))
-    # print(delete_data("air_quality.db", "geo_data", 1000))
-    # print(
-    #     update_data(
-    #         "air_quality.db", "geo_data", {"geo_place_name": "The Heights"}, 1000
-    #     )
-    # )

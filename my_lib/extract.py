@@ -6,8 +6,8 @@ import requests
 
 
 def extract(
-    url="https://data.cityofnewyork.us/resource/c3uy-2p5r.csv",
-    file_name="air_quality.csv",
+    url: str,
+    file_name: str,
 ):
     """ "Extract a url to a file path"""
     file_path = "data/" + file_name

@@ -1,10 +1,11 @@
 # Data Engineering Mini Project Five
 
-[![CI](https://github.com/nogibjj/Leonard_Eshun_Mini_Project_One/actions/workflows/workflow.yml/badge.svg)](https://github.com/nogibjj/Leonard_Eshun_Mini_Project_One/actions/workflows/workflow.yml)
+[![CI](https://github.com/nogibjj/Leonard_Eshun_Mini_Project_Five/actions/workflows/workflow.yml/badge.svg)](https://github.com/nogibjj/Leonard_Eshun_Mini_Project_Five/actions/workflows/workflow.yml)
 
 
 Column names shouldn't have spaces
 The ID column should always be the first column
+Give the csv a header (first row)
 
 
 
