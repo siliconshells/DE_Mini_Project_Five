@@ -23,8 +23,8 @@ The requirements are:
 	- url : The url for the external CSV file
 	- file_name : The file name to use to save the CSV file locally
 
-	> [!NOTE]
-	> Give the CSV file a header (first row)
+> [!NOTE]
+> - Give the CSV file a header (first row).
 
 
 1. **transform_n_load** to create a number of tables in the SQLite database based on the table structures you give it for transformation, then saves the content of the csv file to the tables you created. 
