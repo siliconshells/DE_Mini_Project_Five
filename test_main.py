@@ -1,6 +1,13 @@
 from my_lib.extract import extract
 from my_lib.transform import transform_n_load
-from my_lib.crud import read_data, read_all_data, save_data, delete_data, update_data
+from my_lib.crud import (
+    read_data,
+    read_all_data,
+    save_data,
+    delete_data,
+    update_data,
+    get_table_columns,
+)
 
 
 # Test extract
@@ -90,8 +97,8 @@ def test_delete_data():
 
 
 # Test read all column names
-def test_read_all_columns():
-    print(test_read_all_columns("air_quality.db", "air_quality"))
+def get_table_columns():
+    print(get_table_columns("air_quality.db", "air_quality"))
 
 
 if __name__ == "__main__":
@@ -102,4 +109,4 @@ if __name__ == "__main__":
     test_save_data()
     test_update_data()
     test_delete_data()
-    test_read_all_columns()
+    get_table_columns()
