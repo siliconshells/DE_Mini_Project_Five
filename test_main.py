@@ -28,11 +28,12 @@ def test_extract():
 
     log_tests("Testing if CSV file exists...")
     assert os.path.exists("data/air_quality.csv")
-    log_tests("Test Successful", last_in_group=True)
+    log_tests("Extraction Test Successful", last_in_group=True)
 
 
 # Test transform and load
 def test_transform_and_load():
+    log_tests("Transform and Load Test", header=True)
     transform_n_load(
         local_dataset="air_quality.csv",
         database_name="air_quality.db",
@@ -81,40 +82,53 @@ def test_transform_and_load():
             "fn_indicator_id": 1,
         },
     )
+    log_tests("Transform and Load Test Successful", last_in_group=True)
 
 
 # Test read data
 def test_read_data():
+    log_tests("One Record Reading Test", header=True)
     print(read_data("air_quality.db", "air_quality", 740885))
+    log_tests("One Record Reading Test Successful", last_in_group=True)
 
 
 # Test read all data
 def test_read_all_data():
+    log_tests("All Records Reading Test", header=True)
     print(read_all_data("air_quality.db", "air_quality"))
+    log_tests("All Records Reading Test Successful", last_in_group=True)
 
 
 # Test save data
 def test_save_data():
+    log_tests("Record Saving Test", header=True)
     print(save_data("air_quality.db", "geo_data", ["1000", "Lancaster", "UFO"]))
+    log_tests("Record Saving Test Successful", last_in_group=True)
 
 
 # Test update data
 def test_update_data():
+    log_tests("Record Update Test", header=True)
     print(
         update_data(
             "air_quality.db", "geo_data", {"geo_place_name": "The Heights"}, 1000
         )
     )
+    log_tests("Record Update Test Successful", last_in_group=True)
 
 
 # Test delete data
 def test_delete_data():
+    log_tests("Record Deletion Test", header=True)
     print(delete_data("air_quality.db", "geo_data", 1000))
+    log_tests("Record Deletion Test Successful", last_in_group=True)
 
 
 # Test read all column names
 def test_get_table_columns():
+    log_tests("Reading All Column Test", header=True)
     print(get_table_columns("air_quality.db", "air_quality"))
+    log_tests("Reading All Column Test Successful", last_in_group=True)
 
 
 # Two addtional queries to meet requirements

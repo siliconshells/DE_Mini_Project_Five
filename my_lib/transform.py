@@ -31,15 +31,19 @@ def transform_n_load(
 
     c = conn.cursor()
     # Create tables
-    log_tests("Creating tables...")
     for k, v in new_data_tables.items():
+        log_tests(f"Creating non-lookup table: {k}")
         create_table(c, k, v, column_attributes)
 
     for k, v in new_lookup_tables.items():
+        log_tests(f"Creating lookup table: {k}")
         create_table(c, k, v, column_attributes)
+    log_tests("Tables created.")
 
     # skip the first row
+    log_tests("Skipping the first row...")
     next(reader)
+    log_tests("Inserting table data...")
     for row in reader:
         for k, v in new_lookup_tables.items():
             exec_str = f"select count({v[0]}) from {k} where {v[0]} = {int(row[column_map[v[0]]])}"
@@ -53,6 +57,8 @@ def transform_n_load(
             data_values = "', '".join([(row[column_map[col]]) for col in v])
             c.execute(f"INSERT INTO {k} ({', '.join(v)}) VALUES ('{data_values}')")
         conn.commit()
+    log_tests("Inserting table data completed")
 
     conn.close()
+
     return "Transform  and load Successful"
