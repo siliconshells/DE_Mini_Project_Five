@@ -6,7 +6,6 @@ def get_table_columns(database_name: str, table_name: str):
     conn = sqlite3.connect("data/" + database_name)
     c = conn.cursor()
     to_execute = f"SELECT name FROM pragma_table_info('{table_name}')"
-    log_tests(to_execute, issql=True)
     columns = c.execute(to_execute).fetchall()
     return [
         (str(column).strip(")").strip("(").strip(",").strip("'")) for column in columns
@@ -22,9 +21,11 @@ def get_primary_key(cursor, table_name):
 def read_data(database_name: str, table_name: str, data_id: int):
     conn = sqlite3.connect("data/" + database_name)
     c = conn.cursor()
-    result = c.execute(
+    to_execute = (
         f"select * from {table_name} where {get_primary_key(c, table_name)} = {data_id}"
-    ).fetchall()
+    )
+    log_tests(to_execute, issql=True)
+    result = c.execute(to_execute).fetchall()
     c.close()
     conn.close()
     if result:
