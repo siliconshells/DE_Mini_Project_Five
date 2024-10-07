@@ -10,6 +10,15 @@ from my_lib.crud import (
 )
 
 
+def log_tests(log, iscode):
+    """adds to a logs markdown file to show successful operations"""
+    with open("test_log.md", "a") as file:
+        if iscode:
+            file.write(f"```sql\n{log}\n```\n\n")
+        else:
+            file.write(f"\n{log}\n\n\n")
+
+
 # Test extract
 def test_extract():
     extract("https://data.cityofnewyork.us/resource/c3uy-2p5r.csv", "air_quality.csv")
