@@ -24,7 +24,7 @@ The requirements are:
 	- file_name : The file name to use to save the CSV file locally
 
 	> [!NOTE]
-	> - Give the CSV file a header (first row).
+	> Give the CSV file a header (first row).
 
 
 1. **transform_n_load** to create a number of tables in the SQLite database based on the table structures you give it for transformation, then saves the content of the csv file to the tables you created. 
@@ -46,8 +46,8 @@ The requirements are:
 	- column_map : A dictionary maping the columns in the new tables defined above to the column indices in the CSV file. The key is the column.
 
 	> [!NOTE]
-	> - The ID Primary Key of the table should always be the first column.
-	> - Column names shouldn't have spaces.
+	> The ID Primary Key of the table should always be the first column.
+	> Column names shouldn't have spaces.
 
 
 1. **read_data** to readon one data from the SQLite database based on the record id you give it.
