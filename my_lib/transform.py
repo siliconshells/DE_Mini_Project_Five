@@ -4,7 +4,6 @@ Transform the extracted data
 
 import sqlite3
 import csv
-import os
 
 
 # load the csv file and insert into a new sqlite3 database

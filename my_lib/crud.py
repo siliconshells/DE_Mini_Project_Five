@@ -57,7 +57,6 @@ def delete_data(database_name: str, table_name: str, data_id: int):
 def update_data(database_name: str, table_name: str, things_to_update: dict, data_id: int):
     conn = sqlite3.connect("data/" + database_name)
     c = conn.cursor()
-    print(f"UPDATE {table_name} SET {', '.join([(k + "='" + v+"'") for (k,v) in things_to_update.items()])} WHERE {get_primary_key(c, table_name)} = {data_id}")
     c.execute(f"UPDATE {table_name} SET {', '.join([(k + "='" + v+"'") for (k,v) in things_to_update.items()])} WHERE {get_primary_key(c, table_name)} = {data_id}")
     conn.commit()
     c.close()
