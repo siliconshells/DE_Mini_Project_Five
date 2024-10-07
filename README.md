@@ -23,7 +23,7 @@ The requirements are:
 	- url : The url for the external CSV file
 	- file_name : The file name to use to save the CSV file locally
 
-	>***Note***
+	>**Note:**
 	>Give the CSV file a header (first row).
 
 
@@ -45,9 +45,9 @@ The requirements are:
 	- column_attributes : A dictionary of the column attributes, eg. Integer, Primary Key. The key is the column name and the values are the attributes.
 	- column_map : A dictionary maping the columns in the new tables defined above to the column indices in the CSV file. The key is the column.
 
-	> ***Note***
-	> The ID Primary Key of the table should always be the first column. 
-	> Column names shouldn't have spaces.
+	>**Note:**
+	>The ID Primary Key of the table should always be the first column. 
+	>Column names also shouldn't have spaces.
 
 
 1. **read_data** to readon one data from the SQLite database based on the record id you give it.
@@ -106,6 +106,55 @@ The requirements are:
 
 ## CLI Integration
 The main.py script provides a CLI allowing the ETL and CRUD operations to be done from the command line.
+
+At the cli prompt, type:
+```
+python main.py
+```
+
+and follow with the argument information below, leaving space between arguments.
+
+	extract:
+   		url
+        file_name
+
+    transform_n_load:
+        local_dataset
+        database_name
+        new_data_tables, type=dict
+        new_lookup_tables, type=dict
+        column_attributes, type=dict
+        column_map, type=dict
+
+    read_data:
+        database_name
+        table_name
+        data_id, type=int
+
+    read_all_data:
+        database_name
+        table_name
+
+    save_data:
+        database_name
+        table_name
+        row, type=list
+
+    update_data:
+        database_name
+        table_name
+        data_id, type=int
+        things_to_update, type=dict
+
+    delete_data:
+        database_name
+        table_name
+        data_id, type=int
+
+    get_table_columns:
+        database_name
+        table_name
+```
 
 > [!IMPORTANT]
 > It's important to provide the arguments in the order and formats as desribed above for the CLI to work.
