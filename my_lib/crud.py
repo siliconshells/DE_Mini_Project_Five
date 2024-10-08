@@ -6,6 +6,8 @@ def get_table_columns(database_name: str, table_name: str):
     conn = sqlite3.connect("data/" + database_name)
     c = conn.cursor()
     to_execute = f"SELECT name FROM pragma_table_info('{table_name}')"
+    log_tests("Executing query...")
+    log_tests(to_execute, issql=True)
     columns = c.execute(to_execute).fetchall()
     return [
         (str(column).strip(")").strip("(").strip(",").strip("'")) for column in columns
@@ -24,6 +26,7 @@ def read_data(database_name: str, table_name: str, data_id: int):
     to_execute = (
         f"select * from {table_name} where {get_primary_key(c, table_name)} = {data_id}"
     )
+    log_tests("Executing query...")
     log_tests(to_execute, issql=True)
     result = c.execute(to_execute).fetchall()
     c.close()
@@ -37,7 +40,10 @@ def read_data(database_name: str, table_name: str, data_id: int):
 def read_all_data(database_name: str, table_name: str):
     conn = sqlite3.connect("data/" + database_name)
     c = conn.cursor()
-    result = c.execute(f"select * from {table_name}").fetchall()
+    to_execute = f"select * from {table_name}"
+    log_tests("Executing query...")
+    log_tests(to_execute, issql=True)
+    result = c.execute(to_execute).fetchall()
     c.close()
     conn.close()
     if result:
@@ -51,7 +57,10 @@ def save_data(database_name: str, table_name: str, row: list):
     c = conn.cursor()
     col_names = ", ".join(get_table_columns(database_name, table_name))
     data_values = "', '".join(row)
-    c.execute(f"INSERT INTO {table_name} ({col_names}) VALUES ('{data_values}')")
+    to_execute = f"INSERT INTO {table_name} ({col_names}) VALUES ('{data_values}')"
+    log_tests("Executing query...")
+    log_tests(to_execute, issql=True)
+    c.execute(to_execute)
     conn.commit()
     c.close()
     conn.close()
@@ -61,9 +70,12 @@ def save_data(database_name: str, table_name: str, row: list):
 def delete_data(database_name: str, table_name: str, data_id: int):
     conn = sqlite3.connect("data/" + database_name)
     c = conn.cursor()
-    c.execute(
+    to_execute = (
         f"delete from {table_name} where {get_primary_key(c, table_name)} = {data_id}"
     )
+    log_tests("Executing query...")
+    log_tests(to_execute, issql=True)
+    c.execute(to_execute)
     conn.commit()
     c.close()
     conn.close()
@@ -78,9 +90,10 @@ def update_data(
     set_values = ", ".join(
         [(k + "='" + v + "'") for (k, v) in things_to_update.items()]
     )
-    c.execute(
-        f"UPDATE {table_name} SET {set_values} WHERE {get_primary_key(c, table_name)} = {data_id}"
-    )
+    to_execute = f"UPDATE {table_name} SET {set_values} WHERE {get_primary_key(c, table_name)} = {data_id}"
+    log_tests("Executing query...")
+    log_tests(to_execute, issql=True)
+    c.execute(to_execute)
     conn.commit()
     c.close()
     conn.close()

@@ -45,7 +45,13 @@ def transform_n_load(
     next(reader)
     log_tests("Inserting table data...")
     for row in reader:
+        first_for_loop_broken = False
         for k, v in new_lookup_tables.items():
+            # If the ID is not a number don't import it
+            if not row[column_map[v[0]]].isnumeric():
+                first_for_loop_broken = True
+                break  # Go to outer loop
+
             exec_str = f"select count({v[0]}) from {k} where {v[0]} = {int(row[column_map[v[0]]])}"
             result = c.execute(exec_str).fetchone()[0]
             if result == 0:
@@ -53,10 +59,12 @@ def transform_n_load(
                 c.execute(f"INSERT INTO {k} ({', '.join(v)}) VALUES ('{data_values}')")
                 conn.commit()
 
-        for k, v in new_data_tables.items():
-            data_values = "', '".join([(row[column_map[col]]) for col in v])
-            c.execute(f"INSERT INTO {k} ({', '.join(v)}) VALUES ('{data_values}')")
-        conn.commit()
+        # Only load the data if all lookup information are there
+        if not first_for_loop_broken:
+            for k, v in new_data_tables.items():
+                data_values = "', '".join([(row[column_map[col]]) for col in v])
+                c.execute(f"INSERT INTO {k} ({', '.join(v)}) VALUES ('{data_values}')")
+            conn.commit()
     log_tests("Inserting table data completed")
 
     conn.close()
