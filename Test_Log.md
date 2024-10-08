@@ -95,13 +95,3 @@ SELECT name FROM pragma_table_info('air_quality')
 Asserting the air_quality table has six (6) columns <br />Assert Successful <br />Reading All Column Test Successful
 
 
-Executing query... <br />
-```sql
-select * from geo_data
-```
-
-Executing query... <br />
-```sql
-select * from indicator
-```
-

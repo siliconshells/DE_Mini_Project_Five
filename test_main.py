@@ -134,7 +134,7 @@ def test_save_data():
 
     log_tests("Asserting there's no record in geo_data with ID 100000")
     result = read_data("air_quality.db", "geo_data", 100000)
-    assert result == None
+    assert result is None
     log_tests("Assert Successful")
 
     log_tests("Saving new record with ID 100000")
@@ -184,7 +184,7 @@ def test_delete_data():
 
     log_tests("Asserting there's no record in geo_data with ID 100000")
     result = read_data("air_quality.db", "geo_data", 100000)
-    assert result == None
+    assert result is None
     log_tests("Assert Successful")
 
     log_tests("Record Deletion Test Successful", last_in_group=True)
