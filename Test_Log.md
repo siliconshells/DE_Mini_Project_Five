@@ -115,3 +115,4 @@ Executing query... <br />
 select * from indicator where indicator_id = 653
 ```
 
+Creating non-lookup table: air_quality <br />Creating lookup table: indicator <br />Creating lookup table: geo_data <br />Tables created. <br />Skipping the first row... <br />Inserting table data... <br />Inserting table data completed <br />

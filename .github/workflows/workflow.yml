@@ -23,6 +23,6 @@ jobs:
       - name: extract 
         run: make extract 
       - name: transfer and load
-        run: make transfer_and_load 
+        run: make transform_and_load 
       - name: query
         run: make query
