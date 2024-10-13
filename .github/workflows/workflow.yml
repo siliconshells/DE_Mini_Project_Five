@@ -22,7 +22,7 @@ jobs:
         run: make test
       - name: extract 
         run: make extract 
-      - name: transfer and load
+      - name: transform and load
         run: make transform_and_load 
       - name: query
         run: make query
