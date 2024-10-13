@@ -10,6 +10,7 @@ from my_lib.crud import (
     update_data,
     get_table_columns,
 )
+import ast
 
 
 def handle_arguments(args):
@@ -37,15 +38,15 @@ def handle_arguments(args):
     elif args.Functions == "transform_n_load":
         parser.add_argument("local_dataset")
         parser.add_argument("database_name")
-        parser.add_argument("new_data_tables", type=dict)
-        parser.add_argument("new_lookup_tables", type=dict)
-        parser.add_argument("column_attributes", type=dict)
-        parser.add_argument("column_map", type=dict)
+        parser.add_argument("new_data_tables")
+        parser.add_argument("new_lookup_tables")
+        parser.add_argument("column_attributes")
+        parser.add_argument("column_map")
 
     elif args.Functions == "read_data":
         parser.add_argument("database_name")
         parser.add_argument("table_name")
-        parser.add_argument("data_id", type=int)
+        parser.add_argument("data_id")
 
     elif args.Functions == "read_all_data":
         parser.add_argument("database_name")
@@ -54,18 +55,18 @@ def handle_arguments(args):
     elif args.Functions == "save_data":
         parser.add_argument("database_name")
         parser.add_argument("table_name")
-        parser.add_argument("row", type=list)
+        parser.add_argument("row")
 
     elif args.Functions == "update_data":
         parser.add_argument("database_name")
         parser.add_argument("table_name")
-        parser.add_argument("data_id", type=int)
-        parser.add_argument("things_to_update", type=dict)
+        parser.add_argument("data_id")
+        parser.add_argument("things_to_update")
 
     elif args.Functions == "delete_data":
         parser.add_argument("database_name")
         parser.add_argument("table_name")
-        parser.add_argument("data_id", type=int)
+        parser.add_argument("data_id")
 
     elif args.Functions == "get_table_columns":
         parser.add_argument("database_name")
@@ -90,15 +91,19 @@ def main():
             transform_n_load(
                 args.local_dataset,
                 args.database_name,
-                args.new_data_tables,
-                args.new_lookup_tables,
-                args.column_attributes,
-                args.column_map,
+                ast.literal_eval(args.new_data_tables),
+                ast.literal_eval(args.new_lookup_tables),
+                ast.literal_eval(args.column_attributes),
+                ast.literal_eval(args.column_map),
             )
         )
 
     elif args.Functions == "read_data":
-        print(read_data(args.database_name, args.table_name, args.data_id))
+        print(
+            read_data(
+                args.database_name, args.table_name, ast.literal_eval(args.data_id)
+            )
+        )
 
     elif args.Functions == "read_all_data":
         print(read_all_data(args.database_name, args.table_name))
@@ -108,19 +113,26 @@ def main():
             save_data(
                 args.database_name,
                 args.table_name,
-                args.row,
+                ast.literal_eval(args.row),
             )
         )
 
     elif args.action == "update_data":
         print(
             update_data(
-                args.database_name, args.table_name, args.data_id, args.things_to_update
+                args.database_name,
+                args.table_name,
+                ast.literal_eval(args.data_id),
+                ast.literal_eval(args.things_to_update),
             )
         )
 
     elif args.Functions == "delete_data":
-        print(delete_data(args.database_name, args.table_name, args.data_id))
+        print(
+            delete_data(
+                args.database_name, args.table_name, ast.literal_eval(args.data_id)
+            )
+        )
 
     elif args.Functions == "get_table_columns":
         print(get_table_columns(args.database_name, args.table_name))

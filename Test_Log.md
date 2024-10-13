@@ -95,3 +95,23 @@ SELECT name FROM pragma_table_info('air_quality')
 Asserting the air_quality table has six (6) columns <br />Assert Successful <br />Reading All Column Test Successful
 
 
+Executing query... <br />
+```sql
+select * from geo_data
+```
+
+Executing query... <br />
+```sql
+select * from indicator
+```
+
+Creating non-lookup table: air_quality <br />Creating lookup table: indicator <br />Creating lookup table: geo_data <br />Tables created. <br />Skipping the first row... <br />Inserting table data... <br />Inserting table data completed <br />Creating non-lookup table: air_quality <br />Creating lookup table: indicator <br />Creating lookup table: geo_data <br />Tables created. <br />Skipping the first row... <br />Inserting table data... <br />Inserting table data completed <br />Executing query... <br />
+```sql
+select * from indicator
+```
+
+Executing query... <br />
+```sql
+select * from indicator where indicator_id = 653
+```
+
